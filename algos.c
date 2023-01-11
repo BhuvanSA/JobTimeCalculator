@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int noP;
 
@@ -11,7 +12,11 @@ typedef struct {
   int wt;
 } process;
 
+process *p;
+
 int main(void) {
+  // Taking the table as input
+  p = (process *)malloc(20 * sizeof(process));
   printf("Enter no of processes\n");
   scanf("%i", &noP);
   process processes[noP];
@@ -23,22 +28,19 @@ int main(void) {
   }
   printf("\n\n");
 
+  // Sorting list according to arrival time using bubble sort
   for (int i = 0; i < noP - 1; i++) {
     for (int j = 0; j < noP - 1 - i; j++) {
       if (processes[j].at > processes[j + 1].at) {
-        int tempid = processes[j].id;
-        int tempat = processes[j].at;
-        int tempbt = processes[j].bt;
-        processes[j].id = processes[j + 1].id;
-        processes[j].at = processes[j + 1].at;
-        processes[j].bt = processes[j + 1].bt;
-        processes[j + 1].id = tempid;
-        processes[j + 1].at = tempat;
-        processes[j + 1].bt = tempbt;
+        process temp = processes[j];
+        processes[j] = processes[j + 1];
+        processes[j + 1] = temp;
       }
     }
   }
 
+  // A algorithm which simulates FCFS and stores totaltt Turnaround time and
+  // other stuff
   int ct;
   int totaltt = 0;
   int totalwt = 0;
@@ -57,6 +59,7 @@ int main(void) {
     totalwt = processes[i].wt;
   }
 
+  // Printing the output in pretty formatted layout
   printf("------------------------------------------------------------------"
          "--------"
          "------------\n");
