@@ -1,0 +1,7 @@
+Ready queue need not be of the same index as jobpool so declare a new counter to calculate the no of processes in readyquvue
+
+re init ic to zero after algo is completed
+
+
+add a fucntion which triggers to check if all processes are completed or not and update a variable which can be used to stop the execution of for loop
+& make it trigger every time a job is completed
